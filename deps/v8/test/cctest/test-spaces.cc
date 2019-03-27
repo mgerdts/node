@@ -144,7 +144,7 @@ TEST(MemoryAllocator) {
       faked_space.AreaSize(), &faked_space, NOT_EXECUTABLE);
 
   first_page->InsertAfter(faked_space.anchor()->prev_page());
-  CHECK(first_page->is_valid());
+  CHECK(Page::IsValid(first_page));
   CHECK(first_page->next_page() == faked_space.anchor());
   total_pages++;
 
@@ -166,7 +166,7 @@ TEST(MemoryAllocator) {
   CHECK(total_pages == page_count);
 
   Page* second_page = first_page->next_page();
-  CHECK(second_page->is_valid());
+  CHECK(Page::IsValid(second_page));
   memory_allocator->Free(first_page);
   memory_allocator->Free(second_page);
   memory_allocator->TearDown();
