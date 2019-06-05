@@ -102,6 +102,15 @@
               '-Wl,-force_load,<(v8_base)',
             ],
           },
+          'conditions': [
+            ['OS!="aix" and node_shared=="false"', {
+              'ldflags': [
+                '-Wl,--whole-archive,<(obj_dir)/deps/v8/src/'
+		    '<(STATIC_LIB_PREFIX)v8_base<(STATIC_LIB_SUFFIX)',
+                '-Wl,--no-whole-archive',
+              ],
+            }],
+	  ],
         }],
       ],
     }],
